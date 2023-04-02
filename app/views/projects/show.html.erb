@@ -1,0 +1,15 @@
+<%= render 'shared/content_title', title: @project.name %>
+<p class="mb-4">
+  Description:
+  <%= @project.description %>
+</p>
+
+<div class="mb-5 d-flex">
+  <%= link_to "Create Ticket", new_ticket_path(project: @project.id), class: "btn green-btn" %>
+  <%= link_to "Edit Project", edit_project_path(@project), class: "btn blue-btn ml-2" %>
+  <%= link_to "Delete Project", project_path(@project), class: "btn red-btn ml-2", method: 'delete', data: {confirm: "Are you sure?"} %>
+</div>
+
+<h4 class="mb-4">Tickets</h4>
+
+<%= render 'tickets/ticket_list' %>

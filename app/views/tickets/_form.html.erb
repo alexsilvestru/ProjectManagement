@@ -1,0 +1,29 @@
+<% from_project_page ||= false %>
+<% new_record_path = @ticket.new_record? ? tickets_path : ticket_path(@ticket) %>
+<% route_back = from_project_page ? :back : new_record_path %>
+
+<div class="col-md-6 mx-auto">
+  <%= form_with local: true, model: @ticket do |f| %>
+    <div class="form-group">
+      <%= f.label :project_id, 'Project' %>
+      <%= f.select(:project_id, Project.options_for_select, { prompt: 'Select Project' }, { required: 'true', autofocus: 'true', class: 'form-control' }) %>
+    </div>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, required: 'true', autofocus: 'true', class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :body %>
+      <%= f.text_area :body, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :status %>
+      <%= f.select :status, Ticket::STATUS, { prompt: 'Select Status' }, { required: 'true', class: 'form-control' } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit class: 'btn' %>
+      <%= link_to "Cancel", route_back, class: "ml-2 btn red-btn" %>
+    </div>
+  <% end %>
+</div>
