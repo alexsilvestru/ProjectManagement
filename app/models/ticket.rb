@@ -12,12 +12,6 @@ class Ticket < ApplicationRecord
   validates :project_id, presence: true
   validates :user_id, presence: true
 
-  def add_tags(tags_id)
-    tags_id.each do |tag_id|
-      self.tags << Tag.find(tag_id)
-    end
-  end
-
   def sort_comments
     self.comments.sort_by { |comment| comment.updated_at }.reverse
   end
